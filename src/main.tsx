@@ -1,13 +1,14 @@
-import './css/index.css';
+import 'modern-normalize';
+import './css/main.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/App';
+import RouteSwitch from './components/RouteSwitch';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RouteSwitch />
   </React.StrictMode>,
   document.getElementById('root'),
 );
