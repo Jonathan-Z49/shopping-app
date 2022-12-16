@@ -1,0 +1,198 @@
+body,
+html {
+  min-height: 100%;
+}
+
+body {
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.navbar {
+  background-color: #f1f1f1;
+  position: fixed;
+  width: 100%;
+  max-height: 100px;
+  z-index: 4;
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  &-title {
+    cursor: pointer;
+    margin-right: auto;
+    font-weight: bold;
+    font-size: 3rem;
+  }
+  &-list {
+    font-size: 1.5rem;
+    margin: 0 5rem;
+    min-height: 100px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 3rem;
+    list-style-type: none;
+  }
+  &-link,
+  &-checkout {
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: 200ms ease-in transform;
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+  &-checkout {
+    cursor: pointer;
+    font-size: 2rem;
+    padding: 0;
+    transform: scale(1.3);
+    transition: 200ms ease-in transform;
+    height: 40px;
+    width: 40px;
+    position: relative;
+    &-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #b1b1b1;
+      border-radius: 100%;
+      position: absolute;
+      height: 45px;
+      width: 45px;
+    }
+    &-amount {
+      position: absolute;
+      bottom: -15px;
+      left: -10px;
+      width: 20px;
+      height: 20px;
+      padding: 0.8rem;
+      background-color: orangered;
+      border-radius: 100%;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+}
+
+.home {
+  width: 100%;
+  height: 100%;
+  background-color: #ffdee9;
+  background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  height: 100%;
+  margin: 2.5rem auto;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8.5rem;
+  .product-item-card {
+    height: 350px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(202, 202, 202);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+    .product-item-image-container {
+      width: 100%;
+      height: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 0;
+      transition: 200ms ease-in transform;
+      &:hover {
+        transform: scale(1.1);
+      }
+      .product-item-image {
+        max-width: 100%;
+        max-height: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+    .product-item-title {
+      height: 14%;
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #505050;
+      margin: 0;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
+    .product-item-price {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      height: 10%;
+      width: 100%;
+      font-weight: bold;
+    }
+    .cart-add-btn {
+      font-weight: bold;
+      height: 10%;
+      width: 100%;
+      outline: none;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      background-color: #ffdee9;
+      &:hover {
+        background-color: rgba($color: #000000, $alpha: 0.2);
+      }
+    }
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-spinner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+  height: 150px;
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #383636;
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
