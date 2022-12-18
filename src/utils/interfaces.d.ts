@@ -1,11 +1,12 @@
 interface Product {
-  id: number;
-  title: string;
-  price: string;
-  category: string;
-  description: string;
-  image: string;
+  readonly id: number;
+  readonly title: string;
+  readonly price: number;
+  readonly category: string;
+  readonly description: string;
+  readonly image: string;
   quantity: number;
+  priceOfAllQuantity: number;
 }
 
 interface DataAPI {
@@ -16,4 +17,10 @@ interface DataAPI {
 interface Cart {
   checkoutItems: Product[];
   totalItems: number;
+  totalPrice: number;
+}
+
+interface ReducerAction {
+  type: 'ADD_TO_CART' | 'SUBTRACT_FROM_CART' | 'DELETE_FROM_CART';
+  payload: Product;
 }
