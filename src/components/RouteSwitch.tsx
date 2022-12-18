@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { CartContext } from '../contexts/CartContext';
+import { CartContext, initCartObject } from '../contexts/CartContext';
 import { DataContext } from '../contexts/DataContext';
+import { useCartReducer } from '../utils/cartReducer';
 import Checkout from './Checkout/Checkout';
 import Contact from './Contact/Contact';
 import Home from './Home/Home';
@@ -11,11 +12,11 @@ import Product from './Products/Product';
 
 const RouteSwitch = () => {
   const [data, setData] = useState<DataAPI>({ isLoaded: false, products: [] });
-  const [cart, setCart] = useState<Cart>({ checkoutItems: [], totalItems: 0 });
+  const [cart, dispatchCart] = useReducer(useCartReducer, initCartObject);
 
   return (
     <DataContext.Provider value={{ data, setData }}>
-      <CartContext.Provider value={{ cart, setCart }}>
+      <CartContext.Provider value={{ cart, dispatchCart }}>
         <BrowserRouter>
           <Navbar />
           <Routes>
