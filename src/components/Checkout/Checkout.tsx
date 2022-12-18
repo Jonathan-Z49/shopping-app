@@ -4,60 +4,40 @@ import { CartContext } from '../../contexts/CartContext';
 import CartItem from './CartItem';
 
 const Checkout = () => {
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, dispatchCart } = useContext(CartContext);
 
   const handleCartUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
     const idOfTarget = (e.currentTarget.parentNode as HTMLDivElement).getAttribute(
       'data-product-id',
     );
 
-    const itemIndex = cart.checkoutItems.findIndex(
+    const itemInCart = cart.checkoutItems.find(
       (item) => item.id == Number(idOfTarget),
-    );
+    ) as Product;
 
-    if (itemIndex > -1 && e.currentTarget.classList.contains('add')) {
-      const cartClone = structuredClone(cart);
-
-      cartClone.checkoutItems[itemIndex].quantity += 1;
-
-      setCart((prevState) => ({
-        checkoutItems: cartClone.checkoutItems,
-        totalItems: prevState.totalItems + 1,
-        totalPrice:
-          prevState.totalPrice + Number(cartClone.checkoutItems[itemIndex].price),
-      }));
+    if (e.currentTarget.classList.contains('add')) {
+      dispatchCart({ type: 'ADD_TO_CART', payload: itemInCart });
     }
 
-    if (itemIndex > -1 && e.currentTarget.classList.contains('subtract')) {
-      const cartClone = structuredClone(cart);
+    if (e.currentTarget.classList.contains('subtract')) {
+      dispatchCart({ type: 'SUBTRACT_FROM_CART', payload: itemInCart });
+    }
 
-      if (cartClone.checkoutItems[itemIndex].quantity <= 1) {
-        setCart((prevState) => ({
-          checkoutItems: cartClone.checkoutItems.filter(
-            (item) => item.id !== Number(idOfTarget),
-          ),
-          totalItems: prevState.totalItems - 1,
-          totalPrice:
-            prevState.totalPrice - Number(cartClone.checkoutItems[itemIndex].price),
-        }));
-      } else {
-        cartClone.checkoutItems[itemIndex].quantity -= 1;
-
-        setCart((prevState) => ({
-          checkoutItems: cartClone.checkoutItems,
-          totalItems: prevState.totalItems - 1,
-          totalPrice:
-            prevState.totalPrice - Number(cartClone.checkoutItems[itemIndex].price),
-        }));
-      }
+    if (e.currentTarget.classList.contains('delete')) {
+      dispatchCart({ type: 'DELETE_FROM_CART', payload: itemInCart });
     }
   };
 
   return (
     <main className="checkout">
-      {cart.checkoutItems.map((item) => (
-        <CartItem key={item.id} cartItem={item} onClick={handleCartUpdate} />
-      ))}
+      {cart.totalItems > 0 && <h1>Subtotal: ${cart.totalPrice}</h1>}
+      {cart.totalItems > 0 ? (
+        cart.checkoutItems.map((item) => (
+          <CartItem key={item.id} cartItem={item} onClick={handleCartUpdate} />
+        ))
+      ) : (
+        <h1> Your cart is empty. :&#40;</h1>
+      )}
     </main>
   );
 };
