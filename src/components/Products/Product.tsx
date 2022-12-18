@@ -7,32 +7,18 @@ import ItemCard from './ItemCard';
 
 const Product = () => {
   const { data, setData } = useContext(DataContext);
-  const { cart, setCart } = useContext(CartContext);
+  const { dispatchCart } = useContext(CartContext);
 
   const handleClickCheckout = (e: React.MouseEvent<HTMLButtonElement>) => {
     const idOfTarget = (e.currentTarget.parentNode as HTMLDivElement).getAttribute(
       'data-product-id',
     );
 
-    const itemIndex = cart.checkoutItems.findIndex(
-      (item) => item.id == Number(idOfTarget),
-    );
+    const productItem = structuredClone(
+      data.products.find((item) => item.id === Number(idOfTarget)),
+    ) as Product;
 
-    if (itemIndex > -1) {
-      const cartClone = structuredClone(cart);
-      cartClone.checkoutItems[itemIndex].quantity += 1;
-      cartClone.totalItems += 1;
-      setCart(cartClone);
-    } else {
-      const newItem = data.products.find((item) => item.id == Number(idOfTarget));
-      if (newItem) {
-        newItem.quantity = 0;
-        setCart((prevState) => ({
-          checkoutItems: [...prevState.checkoutItems, newItem],
-          totalItems: prevState.totalItems + 1,
-        }));
-      }
-    }
+    dispatchCart({ type: 'ADD_TO_CART', payload: productItem });
   };
 
   useEffect(() => {
@@ -40,7 +26,12 @@ const Product = () => {
       fetch('https://fakestoreapi.com/products/category/electronics?limit=5')
         .then((res) => res.json())
         .then((json) => {
-          const newData: Product[] = json.map((e: Product) => ({ ...e, quantity: 0 }));
+          const newData: Product[] = json.map((e: Product) => ({
+            ...e,
+            quantity: 1,
+            priceOfAllQuantity: e.price,
+          }));
+
           setData({
             isLoaded: true,
             products: newData,
