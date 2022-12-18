@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-
-import { DataContext } from '../../contexts/DataContext';
+import React from 'react';
 
 const Home = () => {
-  return <section className="home"></section>;
+  return <main className="home"></main>;
 };
 
 export default Home;
