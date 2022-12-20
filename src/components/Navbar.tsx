@@ -1,17 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { CartContext } from '../contexts/CartContext';
 
 const Navbar = () => {
   const { cart } = useContext(CartContext);
+  const navbarRef = useRef<HTMLUListElement>(null);
+
+  const handleClickHamburger = (e: React.MouseEvent<HTMLButtonElement>) => {
+    navbarRef.current?.classList.toggle('active');
+  };
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" ref={navbarRef}>
+      <h1 className="navbar-title">
+        <Link to="/">Shop-ly</Link>
+      </h1>
+      <button className="hamburger" onClick={handleClickHamburger}>
+        <span className="hamburger-item"></span>
+        <span className="hamburger-item"></span>
+        <span className="hamburger-item"></span>
+      </button>
       <ul className="navbar-list">
-        <li className="navbar-title">
-          <Link to="/">Shop-ly</Link>
-        </li>
         <li className="navbar-link">
           <Link to="/">Home</Link>
         </li>
