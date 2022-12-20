@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  height: 100vh;
+  height: 100%;
   font-family: sans-serif;
 }
 
@@ -15,21 +15,37 @@ body {
 }
 
 .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #f1f1f1;
   position: fixed;
   width: 100%;
-  max-height: 100px;
+  height: 100px;
   z-index: 4;
   box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.1);
+  .hamburger {
+    display: none;
+    border: 0;
+    cursor: pointer;
+    margin-right: 1rem;
+    &-item {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px auto;
+      background-color: #101010;
+    }
+  }
   a {
     text-decoration: none;
     color: inherit;
   }
   &-title {
     cursor: pointer;
-    margin-right: auto;
     font-weight: bold;
     font-size: 3rem;
+    margin-left: 2rem;
   }
   &-list {
     font-size: 1.5rem;
@@ -89,24 +105,135 @@ body {
       transform: scale(1.5);
     }
   }
+  @media screen and (max-width: 485px) {
+    position: static;
+    flex-wrap: wrap;
+    gap: 0;
+    &.active {
+      height: 180px;
+      padding-bottom: 1rem;
+      .navbar-list {
+        display: flex;
+        margin: 0;
+      }
+    }
+    .navbar-list {
+      display: none;
+      width: 100%;
+      padding: 0;
+      font-size: 1rem;
+      position: absolute;
+      top: 13%;
+      .navbar-checkout {
+        transform: scale(1);
+        position: relative;
+        right: 15px;
+      }
+      li {
+        padding: 0;
+      }
+    }
+    .hamburger {
+      display: block;
+    }
+  }
+}
+
+@keyframes textslide {
+  0% {
+    transform: translateY(300%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-300%);
+  }
 }
 
 .home {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: url('../logos/blobs.svg');
   background-size: 100% 100%;
+  display: flex;
+  .shop-quote {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 3rem;
+    padding: 3rem;
+  }
+  .messages {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .header-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    max-width: 450px;
+    max-height: 75px;
+    min-width: 250px;
+    min-height: 75px;
+    background-color: #ed1c24;
+    color: white;
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.15);
+  }
+  .message-container {
+    width: 35%;
+    height: 1.5rem;
+    .shop-message-list {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 0.65rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      list-style-type: none;
+      overflow: hidden;
+      li {
+        animation: textslide infinite 10s;
+      }
+    }
+  }
+  @media screen and (max-width: 485px) {
+    flex-direction: column;
+    .messages {
+      height: 50%;
+    }
+    .shop-quote {
+      font-size: 2.5rem;
+      padding: 0 0 1rem 0;
+      margin: 1rem 0 0 0;
+    }
+    .message-container {
+      width: 80%;
+    }
+  }
 }
 
 .products {
   display: grid;
+  height: 100%;
   grid-template-columns: repeat(3, 1fr);
   gap: 3rem;
   height: 100%;
-  margin: 2.5rem auto;
-  justify-content: center;
-  align-items: center;
-  margin-top: 8.5rem;
+  margin: 8.5rem auto;
   .product-item-card {
     height: 350px;
     width: 300px;
@@ -173,6 +300,14 @@ body {
       }
     }
   }
+  @media screen and (max-width: 485px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+    margin-top: 3rem;
+  }
 }
 
 .checkout {
@@ -181,7 +316,11 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 8.5rem;
+  margin-bottom: 5rem;
   gap: 1rem;
+  @media screen and (max-width: 485px) {
+    margin-top: 3rem;
+  }
   .cart-item {
     width: 500px;
     height: 250px;
@@ -192,8 +331,17 @@ body {
     border: 1px solid rgb(202, 202, 202);
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
     transition: 200ms ease-in-out all;
+    @media screen and (max-width: 485px) {
+      width: 80%;
+      height: 40%;
+      p,
+      button {
+        padding: 0;
+        margin: 0;
+      }
+    }
     &-image-container {
-      height: 100%;
+      min-height: 100%;
       width: 100%;
       display: flex;
       justify-content: center;
@@ -213,6 +361,9 @@ body {
       &-price,
       &-title {
         font-weight: bold;
+      }
+      @media screen and (max-width: 485px) {
+        padding: 0;
       }
     }
     &-controls {
@@ -257,6 +408,95 @@ body {
   }
 }
 
+.contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+  &-header {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    align-items: center;
+    width: 50%;
+    height: 10%;
+    @media screen and (max-width: 485px) {
+      width: 80%;
+    }
+  }
+  &-info {
+    font-size: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+    width: 40%;
+    max-width: 430px;
+    height: 20%;
+    border: 1px solid rgb(202, 202, 202);
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.15);
+    p {
+      margin: 0;
+      padding: 0;
+    }
+    @media screen and (max-width: 485px) {
+      width: 80%;
+      height: 25%;
+      margin-top: 1.5rem;
+    }
+  }
+  @media screen and (max-width: 485px) {
+    margin-top: 2rem;
+    justify-content: start;
+  }
+}
+
+footer {
+  height: 50px;
+  width: 100%;
+  margin-top: auto;
+  position: fixed;
+  bottom: 0;
+  background-color: #8ec3b0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.15);
+  gap: 3rem;
+  a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 1rem;
+    img {
+      height: 70%;
+    }
+    #git-logo {
+      transition: 300ms ease-in;
+      &:hover {
+        transform: rotate(360deg);
+      }
+    }
+  }
+  #git-link {
+    @media screen and (max-width: 485px) {
+      position: absolute;
+      left: 0;
+      margin: 0 1rem;
+    }
+  }
+  #fake-api-link {
+    text-decoration: none;
+    position: absolute;
+    margin: 0 1rem;
+    right: 0;
+  }
+}
+
 @keyframes spinner {
   0% {
     transform: rotate(0deg);
@@ -269,6 +509,8 @@ body {
   position: absolute;
   left: 0;
   right: 0;
+  top: 50%;
+  bottom: 50%;
   margin-left: auto;
   margin-right: auto;
   width: 150px;
