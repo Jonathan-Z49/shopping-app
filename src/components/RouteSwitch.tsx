@@ -6,6 +6,7 @@ import { DataContext } from '../contexts/DataContext';
 import { useCartReducer } from '../utils/cartReducer';
 import Checkout from './Checkout/Checkout';
 import Contact from './Contact/Contact';
+import Footer from './Footer';
 import Home from './Home/Home';
 import Navbar from './Navbar';
 import Product from './Products/Product';
@@ -26,6 +27,7 @@ const RouteSwitch = () => {
             <Route caseSensitive={false} path="/contact" element={<Contact />} />
             <Route caseSensitive={false} path="/checkout" element={<Checkout />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       </CartContext.Provider>
     </DataContext.Provider>
