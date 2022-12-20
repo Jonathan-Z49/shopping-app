@@ -137,6 +137,22 @@ body {
       display: block;
     }
   }
+  @media screen and (max-width: 485px) and (min-height: 820px) {
+    &.active {
+      height: 200px;
+      padding-bottom: 1rem;
+    }
+  }
+  @media screen and (min-width: 700px) and (min-height: 950px) {
+    justify-content: normal;
+    &-title {
+      font-size: 2rem;
+    }
+    &-list {
+      margin: 0 0 0 2rem;
+      padding: 0;
+    }
+  }
 }
 
 @keyframes textslide {
@@ -307,6 +323,14 @@ body {
     align-items: center;
     margin-bottom: 5rem;
     margin-top: 3rem;
+  }
+  @media screen and (min-width: 700px) and (min-height: 950px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+    margin-top: 8rem;
   }
 }
 
