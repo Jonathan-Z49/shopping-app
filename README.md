@@ -1,7 +1,10 @@
-# Vite + React + Typescript + Eslint + Prettier
+# Shopping App
 
-A starter for React with Typescript with the fast Vite and all static code testing with Eslint and formatting with Prettier.
+Shopping App with fake store items. Users can browse the provided items, and then add them to their cart showing them the subtotal.
 
+## Features
+- Fake store items provided by [FakeStoreAPI](https://fakestoreapi.com/)
+- Responsiveness
 
 ## Installation
 
