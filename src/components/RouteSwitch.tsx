@@ -18,7 +18,7 @@ const RouteSwitch = () => {
   return (
     <DataContext.Provider value={{ data, setData }}>
       <CartContext.Provider value={{ cart, dispatchCart }}>
-        <BrowserRouter>
+        <BrowserRouter basename="/home">
           <Navbar />
           <Routes>
             <Route caseSensitive={false} path="/" element={<Home />} />
