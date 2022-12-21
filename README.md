@@ -7,6 +7,8 @@ Built with **Vite + Typescript + React + SCSS**
 - Fake store items provided by [FakeStoreAPI](https://fakestoreapi.com/)
 - Responsiveness
 
+## [Live Demo](https://jonathan-z49.github.io/shopping-app/)
+
 ## Installation
 
 Clone the repo and run `npm install`
