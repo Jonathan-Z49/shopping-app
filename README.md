@@ -1,6 +1,7 @@
 # Shopping App
 
-Shopping App with fake store items. Users can browse the provided items, and then add them to their cart showing them the subtotal.
+Shopping App with fake store items. Users can browse the provided items, and then add them to their cart showing them the subtotal.  
+Built with **Vite + Typescript + React + SCSS**
 
 ## Features
 - Fake store items provided by [FakeStoreAPI](https://fakestoreapi.com/)
